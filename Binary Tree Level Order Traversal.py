@@ -10,7 +10,17 @@
 #         self.right = right
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        
+        #dfs
+        output = []
+        def dfs(node, level):
+            if not node: return
+            if len(output) < level+1:
+                output.append([])
+            dfs(node.left, level+1)
+            dfs(node.right, level+1)
+            output[level].append(node.val)
+        dfs(root, 0)
+        return output
         
         #bfs
         q = deque([(root,0)])
